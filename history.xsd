@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/2001/XMLSchema">
+
+    <xs:complexType name="euroType">
+        <xs:sequence>
+            <xs:element name="teams" type="teamsType"/>
+            <xs:element name="groups" type="groupsType"/>
+            <xs:element name="matches" type="matchesType"/>
+        </xs:sequence>
+        <xs:attribute name="year" type="xs:int"/>
+    </xs:complexType>
+
+    <xs:complexType name="teamsType">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="unbounded" name="team" type="teamType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="teamType">
+        <xs:sequence>
+            <xs:element name="nation" type="nationType"/>
+            <xs:element name="position" type="positionType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="nationType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="short-name" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="positionType">
+        <xs:sequence>
+            <xs:element name="player" type="playerType"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="posType"/>
+    </xs:complexType>
+
+    <xs:simpleType name="posType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="playground"/>
+            <xs:enumeration value="defense"/>
+            <xs:enumeration value="attack"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="playerType">
+        <xs:sequence>
+            <xs:element name="name" type="nameType"/>
+            <xs:element name="club" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="nameType">
+        <xs:sequence>
+            <xs:element name="first-name" type="xs:string"/>
+            <xs:element name="last-name" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="groupsType">
+        <xs:sequence>
+            <xs:element name="group" type="groupType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="groupType">
+        <xs:sequence>
+            <xs:element name="team" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:int"/>
+    </xs:complexType>
+
+    <xs:complexType name="matchesType">
+        <xs:sequence>
+            <xs:element name="last-sixteen" type="roundType"/>
+            <xs:element name="last-eight" type="roundType"/>
+            <xs:element name="last-four" type="roundType"/>
+            <xs:element name="last-two" type="roundType"/>
+            <xs:element name="winner" type="winnerType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="roundType">
+        <xs:sequence>
+            <xs:element name="match" type="matchType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="matchType">
+        <xs:sequence>
+            <xs:element name="team" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="winnerType">
+        <xs:sequence>
+            <xs:element name="team" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="euro" type="euroType"/>
+</xs:schema>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:complexType name="browserType">
+        <xs:sequence>
+            <xs:element name="tab" type="tabType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="tabType">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="sublink" type="sublinkType"/>
+            <xs:element name="subpage" type="subpageType"/>
+            <xs:element name="content" type="xs:string"/>
+        </xs:choice>
+        <xs:attribute name="id" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="sublinkType">
+        <xs:attribute name="url" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="subpageType">
+        <xs:sequence>
+            <xs:element name="content" type="xs:string" minOccurs="0"/>
+            <xs:element name="subpage" type="subpageType" minOccurs="0" />
+            <xs:element name="sublink" type="sublinkType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:element name="browser" type="browserType"/>
+</xs:schema>
